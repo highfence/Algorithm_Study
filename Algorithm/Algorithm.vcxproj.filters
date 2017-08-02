@@ -24,15 +24,18 @@
     <ClInclude Include="Fibonacci.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="unittest1.cpp">
+    <ClCompile Include="Fibonacci.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Fibonacci.cpp">
+    <ClCompile Include="Fibonacci_UnitTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
