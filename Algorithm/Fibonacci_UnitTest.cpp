@@ -24,9 +24,11 @@ namespace Algorithm
 		{
 			_fibonacci = new Fibonacci();
 
+			// Boundary Case : 0인 경우.
 			auto retval = _fibonacci->Fibonacci_By_Recursion(0);
 			Assert::AreEqual(0, retval);
 
+			// 각각 1, 2, 5, 10번째 피보나치 수열의 수.
 			retval = _fibonacci->Fibonacci_By_Recursion(1);
 			Assert::AreEqual(1, retval);
 
@@ -39,6 +41,7 @@ namespace Algorithm
 			retval = _fibonacci->Fibonacci_By_Recursion(10);
 			Assert::AreEqual(55, retval);
 
+			// Error Case : 0미만의 값이 들어간 경우.
 			retval = _fibonacci->Fibonacci_By_Recursion(-1);
 			Assert::AreEqual(-1, retval);
 
@@ -49,6 +52,24 @@ namespace Algorithm
 		TEST_METHOD(Fibonacci_Dynamic_Top_Down)
 		{
 			_fibonacci = new Fibonacci();
+
+			auto retval = _fibonacci->Fibonacci_Top_Down_Init(0);
+			Assert::AreEqual(0, retval);
+
+			retval = _fibonacci->Fibonacci_Top_Down_Init(1);
+			Assert::AreEqual(1, retval);
+
+			retval = _fibonacci->Fibonacci_Top_Down_Init(2);
+			Assert::AreEqual(1, retval);
+
+			retval = _fibonacci->Fibonacci_Top_Down_Init(5);
+			Assert::AreEqual(5, retval);
+
+			retval = _fibonacci->Fibonacci_Top_Down_Init(10);
+			Assert::AreEqual(55, retval);
+
+			retval = _fibonacci->Fibonacci_Top_Down_Init(-2);
+			Assert::AreEqual(-2, retval);
 
 			delete _fibonacci;
 		}

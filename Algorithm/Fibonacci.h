@@ -6,7 +6,8 @@ namespace DynamicProgramming
 	{
 		NONE,
 		INVALID_INPUT,
-		ARRAY_NOT_ALLOC_YET
+		ARRAY_NOT_ALLOC_YET,
+		ARRAY_ALLOC_ALREADY
 	};
 
 	class Fibonacci

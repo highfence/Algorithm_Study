@@ -1,4 +1,7 @@
+#include <Windows.h>
+#include <string>
 #include <algorithm>
+
 #include "stdafx.h"
 #include "Fibonacci.h"
 
@@ -22,7 +25,7 @@ namespace DynamicProgramming
 
 	int Fibonacci::Fibonacci_Top_Down_Init(int aimNumber)
 	{
-		if (aimNumber < 0) return -1;
+		if (aimNumber <= 0) return aimNumber;
 
 		// 배열 초기화.
 		if (array_Initialize(aimNumber + 1) != FIBONACCI_RESULT::NONE)
@@ -89,17 +92,20 @@ namespace DynamicProgramming
 
 	FIBONACCI_RESULT Fibonacci::array_Initialize(const int size)
 	{
-		// 아직 배열이 만들어지지 않은 상황이면 에러 반환.
-		if (_resultMemo == nullptr)
+		// 배열이 이미 만들어진 상태라면 에러 반환.
+		if (_resultMemo != nullptr)
 		{
-			return FIBONACCI_RESULT::ARRAY_NOT_ALLOC_YET;
+			return FIBONACCI_RESULT::ARRAY_ALLOC_ALREADY;
 		}
 
-		// 만들어진 상황이라면 사이즈만큼 할당.
+		// 만들어진 상황이 아니라면 사이즈만큼 할당.
 		_resultMemo = new int[size];
 		
-		// 할당한 메모를 1로 초기화.
-		std::fill_n(_resultMemo, size, -1);
+		// 할당한 메모를 -1로 초기화.
+		for (int i = 0; i < size; ++i)
+		{
+			_resultMemo[i] = -1;
+		}
 
 		return FIBONACCI_RESULT::NONE;
 	}
