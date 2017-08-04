@@ -16,6 +16,8 @@ namespace Algorithm
 	{
 	public:
 
+		const long long fibonacci_fifty = 12586269025;
+
 		// 피보나치 관련 메소드들을 가지고 있는 객체.
 		Fibonacci * _fibonacci = nullptr;
 		

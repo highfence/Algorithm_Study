@@ -16,14 +16,14 @@ namespace DynamicProgramming
 		}
 	}
 
-	int Fibonacci::Fibonacci_By_Recursion(int aimNumber)
+	long long Fibonacci::Fibonacci_By_Recursion(int aimNumber)
 	{
 		if (aimNumber < 2) return aimNumber;
 
 		return Fibonacci_By_Recursion(aimNumber - 1) + Fibonacci_By_Recursion(aimNumber - 2);
 	}
 
-	int Fibonacci::Fibonacci_Top_Down_Init(int aimNumber)
+	long long Fibonacci::Fibonacci_Top_Down_Init(int aimNumber)
 	{
 		if (aimNumber <= 0) return aimNumber;
 
@@ -47,7 +47,7 @@ namespace DynamicProgramming
 		return retval;
 	}
 
-	int Fibonacci::Fibonacci_Top_Down_Recur(int aimNumber)
+	long long Fibonacci::Fibonacci_Top_Down_Recur(int aimNumber)
 	{
 		// 계산해 놓은 기록이 있다면 바로 반환.
 		if (_resultMemo[aimNumber] != -1)
@@ -61,7 +61,7 @@ namespace DynamicProgramming
 		return _resultMemo[aimNumber];
 	}
 
-	int Fibonacci::Fibonacci_Botton_Up(int aimNumber)
+	long long Fibonacci::Fibonacci_Botton_Up(int aimNumber)
 	{
 		if (aimNumber < 0) return -1;
 
@@ -99,7 +99,7 @@ namespace DynamicProgramming
 		}
 
 		// 만들어진 상황이 아니라면 사이즈만큼 할당.
-		_resultMemo = new int[size];
+		_resultMemo = new long long[size];
 		
 		// 할당한 메모를 -1로 초기화.
 		for (int i = 0; i < size; ++i)
