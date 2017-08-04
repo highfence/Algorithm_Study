@@ -18,22 +18,23 @@ namespace DynamicProgramming
 		~Fibonacci();
 
 		// Brute-Force 하게 재귀 함수를 호출하는 방법.
-		long long Fibonacci_By_Recursion(int aimNumber);
+		int64_t Fibonacci_By_Recursion(int aimNumber);
 
 		// Dynamic Programming
-		long long Fibonacci_Top_Down_Init(int aimNumber);
-		long long Fibonacci_Top_Down_Recur(int aimNumber);
+		int64_t Fibonacci_Top_Down_Init(int aimNumber);
 
-		long long Fibonacci_Botton_Up(int aimNumber);
+		int64_t Fibonacci_Botton_Up(int aimNumber);
 
 	private :
+
+		int64_t Fibonacci_Top_Down_Recur(int aimNumber);
 
 		FIBONACCI_RESULT array_Initialize(const int size);
 		FIBONACCI_RESULT array_Release();
 
 	private :
 
-		long long * _resultMemo = nullptr;
+		int64_t * _resultMemo = nullptr;
 
 	};
 }

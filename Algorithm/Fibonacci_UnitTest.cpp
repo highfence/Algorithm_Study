@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include <string>
+#include <stdint.h>
 
 #include "Fibonacci.h"
 #include "Util.h"
@@ -10,13 +10,14 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Algorithm
 {		
-	using namespace DynamicProgramming;
+	using Fibonacci = DynamicProgramming::Fibonacci;
 
 	TEST_CLASS(Fibonacci_UnitTest)
 	{
 	public:
 
-		const long long fibonacci_fifty = 12586269025;
+		// 피보나치 수열의 40번째 수.
+		const int64_t fibonacci_fourty = 102334155;
 
 		// 피보나치 관련 메소드들을 가지고 있는 객체.
 		Fibonacci * _fibonacci = nullptr;
@@ -28,24 +29,34 @@ namespace Algorithm
 
 			// Boundary Case : 0인 경우.
 			auto retval = _fibonacci->Fibonacci_By_Recursion(0);
-			Assert::AreEqual(0, retval);
+			int64_t expect = 0;
+			Assert::IsTrue(expect == retval);
 
-			// 각각 1, 2, 5, 10번째 피보나치 수열의 수.
+			// 각각 1, 2, 5, 10, 40번째 피보나치 수열의 수.
 			retval = _fibonacci->Fibonacci_By_Recursion(1);
-			Assert::AreEqual(1, retval);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_By_Recursion(2);
-			Assert::AreEqual(1, retval);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_By_Recursion(5);
-			Assert::AreEqual(5, retval);
+			expect = 5;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_By_Recursion(10);
-			Assert::AreEqual(55, retval);
+			expect = 55;
+			Assert::IsTrue(expect == retval);
+
+			retval = _fibonacci->Fibonacci_By_Recursion(40);
+			expect = fibonacci_fourty;
+			Assert::IsTrue(expect == retval);
 
 			// Error Case : 0미만의 값이 들어간 경우.
 			retval = _fibonacci->Fibonacci_By_Recursion(-1);
-			Assert::AreEqual(-1, retval);
+			expect = -1;
+			Assert::IsTrue(expect == retval);
 
 			delete _fibonacci;
 		}
@@ -55,23 +66,36 @@ namespace Algorithm
 		{
 			_fibonacci = new Fibonacci();
 
+			// Boundary Case : 0인 경우.
 			auto retval = _fibonacci->Fibonacci_Top_Down_Init(0);
-			Assert::AreEqual(0, retval);
+			int64_t expect = 0;
+			Assert::IsTrue(expect == retval);
 
+			// 각각 1, 2, 5, 10, 40번째 피보나치 수열의 수.
 			retval = _fibonacci->Fibonacci_Top_Down_Init(1);
-			Assert::AreEqual(1, retval);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_Top_Down_Init(2);
-			Assert::AreEqual(1, retval);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_Top_Down_Init(5);
-			Assert::AreEqual(5, retval);
+			expect = 5;
+			Assert::IsTrue(expect == retval);
 
 			retval = _fibonacci->Fibonacci_Top_Down_Init(10);
-			Assert::AreEqual(55, retval);
+			expect = 55;
+			Assert::IsTrue(expect == retval);
 
-			retval = _fibonacci->Fibonacci_Top_Down_Init(-2);
-			Assert::AreEqual(-2, retval);
+			retval = _fibonacci->Fibonacci_Top_Down_Init(40);
+			expect = fibonacci_fourty;
+			Assert::IsTrue(expect == retval);
+
+			// Error Case : 0미만의 값이 들어간 경우.
+			retval = _fibonacci->Fibonacci_Top_Down_Init(-1);
+			expect = -1;
+			Assert::IsTrue(expect == retval);
 
 			delete _fibonacci;
 		}
@@ -81,7 +105,38 @@ namespace Algorithm
 		{
 			_fibonacci = new Fibonacci();
 
-			delete _fibonacci;
+			// Boundary Case : 0인 경우.
+			auto retval = _fibonacci->Fibonacci_Botton_Up(0);
+			int64_t expect = 0;
+			Assert::IsTrue(expect == retval);
+
+			// 각각 1, 2, 5, 10, 40번째 피보나치 수열의 수.
+			retval = _fibonacci->Fibonacci_Botton_Up(1);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
+
+			retval = _fibonacci->Fibonacci_Botton_Up(2);
+			expect = 1;
+			Assert::IsTrue(expect == retval);
+
+			retval = _fibonacci->Fibonacci_Botton_Up(5);
+			expect = 5;
+			Assert::IsTrue(expect == retval);
+
+			retval = _fibonacci->Fibonacci_Botton_Up(10);
+			expect = 55;
+			Assert::IsTrue(expect == retval);
+
+			retval = _fibonacci->Fibonacci_Botton_Up(40);
+			expect = fibonacci_fourty;
+			Assert::IsTrue(expect == retval);
+
+			// Error Case : 0미만의 값이 들어간 경우.
+			retval = _fibonacci->Fibonacci_Botton_Up(-1);
+			expect = -1;
+			Assert::IsTrue(expect == retval);
+
+			delete _fibonacci;;
 		}
 	};
 }
