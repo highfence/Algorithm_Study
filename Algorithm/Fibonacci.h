@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 namespace DynamicProgramming
 {
@@ -10,6 +11,20 @@ namespace DynamicProgramming
 		ARRAY_ALLOC_ALREADY
 	};
 
+	class Node_t
+	{
+	public :
+
+		Node_t() {};
+		~Node_t() {};
+
+		int index = -1;
+		std::vector<Node_t*> callNodeList;
+		std::vector<Node_t*>::size_type GetCallNodeSize() const { return callNodeList.size(); }
+
+		int result = -1;
+	};
+
 	class Fibonacci
 	{
 	public :
@@ -18,12 +33,15 @@ namespace DynamicProgramming
 		~Fibonacci();
 
 		// Brute-Force 하게 재귀 함수를 호출하는 방법.
-		int64_t Fibonacci_By_Recursion(int aimNumber);
+		static int64_t Fibonacci_By_Recursion(int aimNumber);
 
 		// Dynamic Programming
 		int64_t Fibonacci_Top_Down_Init(int aimNumber);
 
 		int64_t Fibonacci_Botton_Up(int aimNumber);
+
+		// Topological Sort
+		int64_t Fibonacci_Topological_Sort(int aimNumber);
 
 	private :
 

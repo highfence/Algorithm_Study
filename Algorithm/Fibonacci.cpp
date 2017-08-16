@@ -1,8 +1,10 @@
+#include "stdafx.h"
 #include <Windows.h>
 #include <string>
 #include <algorithm>
+#include <vector>
+#include <list>
 
-#include "stdafx.h"
 #include "Fibonacci.h"
 
 namespace DynamicProgramming
@@ -74,7 +76,7 @@ namespace DynamicProgramming
 		_resultMemo[0] = 0;
 		_resultMemo[1] = 1;
 		
-		for (int i = 2; i <= aimNumber; ++i)
+		for (auto i = 2; i <= aimNumber; ++i)
 		{
 			_resultMemo[i] = _resultMemo[i - 1] + _resultMemo[i - 2];
 		}
@@ -88,6 +90,69 @@ namespace DynamicProgramming
 		}
 
 		return retval;
+	}
+
+	int64_t Fibonacci::Fibonacci_Topological_Sort(int aimNumber)
+	{
+		// 음수값, 0값 처리.
+		if (aimNumber <= 0) return aimNumber;
+
+		// 진입 노드가 0인 노드를 제거하는 방식으로 Topological Sort를 진행할 것이기 때문에,
+		// 제거가 쉬운 List로 그래프를 정의.
+		// 탐색을 위해서 nodeArray에 node들을 생성시키고, 이를 가리키는 포인터 형태로 그래프를 만든다.
+		// 각 배열의 index 인자는 index 값에 해당하는 피보나치 행렬의 subproblem에 해당.
+		auto nodeArray = new Node_t[aimNumber + 1];
+		auto nodeList = std::list<Node_t*>();
+
+		// 인덱스 초기화 및 그래프 생성.
+		for (auto i = 0; i < aimNumber; ++i)
+		{
+			nodeArray[i].index = i;
+			nodeList.push_back(&nodeArray[i]);
+		}
+
+		// 호출 관계 연결.
+		// index n이 m을 호출하는 경우, m의 callNodeList에 n이 들어간다.
+		auto callNodeMaking = [&](Node_t * node)
+		{
+			if (node == nullptr) return;
+
+			auto nodeIdx = node->index;
+			
+			for (auto i = 0; i < 2; ++i)
+			{
+				if (--nodeIdx >= 0)
+				{
+					nodeArray[nodeIdx].callNodeList.push_back(node);
+				}
+			}
+		};
+		for (auto i = 0; i < aimNumber; ++i)
+		{
+			callNodeMaking(&nodeArray[i]);
+		}
+
+		// Topological Sort를 처리되지 않은 노드가 없을 때까지 실행한다.
+		while (nodeList.empty())
+		{
+			// 진입 노드가 0인 노드를 찾는다.
+			auto zeroIndegreeNode = std::find_if(nodeList.begin(), nodeList.end(), [&](Node_t * node) { return node->GetCallNodeSize() == 0; });
+
+			// 진입노드가 0인 노드가 없다면 에러.
+			if (zeroIndegreeNode == nodeList.end()) break;
+
+			// 진입 노드가 0인 노드의 결과 값을 계산한다.
+
+			// 진입 노드가 들어있는 callNodeList를 찾아 제거해준다.
+
+			// 처리했다고 판단하고 노드 리스트에서 제거한다.
+		}
+
+		auto aimValue = nodeArray[aimNumber].result;
+
+		delete[] nodeArray;
+
+		return aimValue;
 	}
 
 	FIBONACCI_RESULT Fibonacci::array_Initialize(const int size)
