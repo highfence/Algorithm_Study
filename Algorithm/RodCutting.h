@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 namespace DynamicProgramming
 {
@@ -9,8 +10,12 @@ namespace DynamicProgramming
 		RodCutting() = default;
 		~RodCutting() {};
 
+		// Brute Recursive Method
+		int Brute_Rod_Cutting(int * priceList, int length);
+
 
 	private :
+
 
 	};
 }
