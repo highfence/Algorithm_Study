@@ -3,6 +3,12 @@
 
 namespace DynamicProgramming
 {
+	typedef struct PriceMemo
+	{
+		int maxPrice = 0;
+		int firstCutIdx = 0;
+	};
+
 	class RodCutting
 	{
 	public :
@@ -14,11 +20,9 @@ namespace DynamicProgramming
 		int Brute_Rod_Cutting(int * priceList, int length);
 
 		// Memoization Method
-		int Memoization_Cutting(int * priceLiat, int length);
+		int Memoization_Rod_Cutting(int * priceList, int length);
 
-	private :
-
-		int Memoization_Cutting_Recur(int * memo, int * pricetList, int length);
-
+		// Bottom-Up Method
+		int Bottom_Up_Rod_Cutting(int * priceList, int length);
 	};
 }

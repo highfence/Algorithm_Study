@@ -40,7 +40,6 @@ namespace DynamicProgramming
 			maxPriceMemo[i] = { 0 };
 		}
 
-		// Recursive Function Define with Lambda
 		std::function<int(int*, int, int*)> recursiveProgress = [&](int * priceList, int length, int * maxPriceMemo) 
 		{
 			if (maxPriceMemo[length] != 0) return maxPriceMemo[length];
@@ -64,5 +63,18 @@ namespace DynamicProgramming
 		delete[] maxPriceMemo;
 
 		return wholeRodPrice;
+	}
+
+	int RodCutting::Bottom_Up_Rod_Cutting(int * priceList, int length)
+	{
+		if (priceList == nullptr || length < 0)
+		{
+			return INT_MIN;
+		}
+
+		if (length == 0) return 0;
+
+
+		return 0;
 	}
 }
